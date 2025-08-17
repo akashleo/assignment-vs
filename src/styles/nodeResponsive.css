@@ -1,0 +1,94 @@
+/* Node Responsive Styling */
+
+.react-flow__node {
+  transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+}
+
+/* Default min/max width constraints */
+.react-flow__node-default {
+  min-width: 150px;
+  max-width: 400px;
+  width: auto;
+}
+
+/* Content-based sizing for specific node types */
+.react-flow__node-input,
+.react-flow__node-output {
+  width: fit-content;
+  min-width: 120px;
+}
+
+.react-flow__node-llm {
+  min-width: 250px;
+}
+
+/* Resize handle styling */
+.node-resize-control {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: #e5e7eb;
+  border-radius: 2px;
+  cursor: nwse-resize;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.react-flow__node:hover .node-resize-control {
+  opacity: 0.7;
+}
+
+.node-resize-control:hover {
+  opacity: 1 !important;
+  background-color: #9ca3af;
+}
+
+/* Content scaling for responsive nodes */
+.react-flow__node-content {
+  max-height: 400px;
+  overflow: auto;
+}
+
+/* Responsive text areas */
+.react-flow__node textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 60px;
+  max-height: 200px;
+}
+
+/* Responsive input fields */
+.react-flow__node input[type="text"],
+.react-flow__node input[type="number"],
+.react-flow__node select {
+  width: 100%;
+}
+
+/* Media queries for different screen sizes */
+@media (max-width: 768px) {
+  .react-flow__node-default {
+    max-width: 300px;
+  }
+  
+  .react-flow__node-llm {
+    min-width: 200px;
+  }
+}
+
+/* Fix for dragging interactions */
+.react-flow__node {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow selection inside content areas */
+.react-flow__node .node-content {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

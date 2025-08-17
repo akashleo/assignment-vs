@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+.out/
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+storybook-static/
+
+# Caches
+.npm/
+.yarn/
+.pnp.*
+.cache/
+.parcel-cache/
+.next/cache/
+.eslintcache
+.stylelintcache
+
+# Tests/coverage
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor/system files
+.DS_Store
+Thumbs.db
+
+# VSCode (keep recommended settings if present)
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Hosting/platform
+.vercel/
+.netlify/
+
+# Misc
+*.local
+*.tgz
