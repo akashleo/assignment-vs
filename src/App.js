@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PipelineUI } from './ui';
 import { SubmitButton } from './submit';
 import { DraggableNode } from './draggableNode';
+import { useStore } from './store';
+import { shallow } from 'zustand/shallow';
 import './styles/dashboard.css';
 
 const nodeCategories = {
@@ -16,7 +18,7 @@ const nodeCategories = {
   ],
   Knowledge: [
     { type: 'dataSource', label: 'Data Source', icon: 'D' },
-    { type: 'template', label: 'Template', icon: 'T' }
+    { type: 'group', label: 'Group', icon: 'G' }
   ],
   AI: [
     { type: 'llm', label: 'LLM', icon: 'L' }
@@ -26,28 +28,44 @@ const nodeCategories = {
   ]
 };
 
+const selector = (state) => ({
+  clearPersistedState: state.clearPersistedState,
+  resetState: state.resetState,
+});
+
 function App() {
   const [activeTab, setActiveTab] = useState('Start');
-  
+  const { clearPersistedState, resetState } = useStore(selector, shallow);
+
   // No search functionality, directly use the active tab
   const filteredNodes = { [activeTab]: nodeCategories[activeTab] };
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">VectorShift</h1>
-        
-        <nav className="tab-navigation">
-          {Object.keys(nodeCategories).map(tab => (
-            <button
-              key={tab}
-              className={`tab-item ${activeTab === tab ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
-        </nav>
+        <div className="header-left">
+          <h1 className="dashboard-title">VectorShift</h1>
+          <nav className="tab-navigation">
+            {Object.keys(nodeCategories).map((tab) => (
+              <button
+                key={tab}
+                className={`tab-item ${activeTab === tab ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab)}
+              >
+                {tab}
+              </button>
+            ))}
+          </nav>
+        </div>
+        <div className="header-right">
+          <button className="action-button clear" onClick={clearPersistedState}>
+            Clear Storage
+          </button>
+          <button className="action-button reset" onClick={resetState}>
+            Reset Flow
+          </button>
+          <SubmitButton />
+        </div>
       </div>
 
       <div className="tab-content">
@@ -73,9 +91,6 @@ function App() {
         <PipelineUI />
       </div>
 
-      <div className="submit-section">
-        <SubmitButton />
-      </div>
     </div>
   );
 }

@@ -8,20 +8,11 @@ import { spacing } from '../styles/designSystem.js';
 
 export const VisualizationNode = ({ id, data }) => {
   const [mode, setMode] = useState(data?.mode || 'raw');
-  const [pretty, setPretty] = useState(data?.pretty ?? true);
-  const [rows, setRows] = useState(data?.rows || 5);
 
   const handles = [
     { type: 'target', position: Position.Left, id: 'input' },
     { type: 'source', position: Position.Right, id: 'output' },
   ];
-
-  const checkboxStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: spacing[2],
-    fontSize: '0.875rem'
-  };
 
   return (
     <BaseNode id={id} data={data} title="Visualize" handles={handles} nodeType="viz">
@@ -32,27 +23,9 @@ export const VisualizationNode = ({ id, data }) => {
           <option value="json">JSON</option>
           <option value="table">Table</option>
           <option value="image">Image URL</option>
+          <option value="line">Line Chart</option>
+          <option value="pie">Pie Chart</option>
         </StyledSelect>
-      </FormGroup>
-
-      <label style={checkboxStyle}>
-        <input 
-          type="checkbox" 
-          checked={pretty} 
-          onChange={(e) => setPretty(e.target.checked)} 
-        />
-        <span>Pretty print</span>
-      </label>
-
-      <FormGroup>
-        <StyledLabel>Max Rows:</StyledLabel>
-        <StyledInput 
-          type="number" 
-          value={rows} 
-          min={1} 
-          max={100} 
-          onChange={(e) => setRows(parseInt(e.target.value || '1', 10))}
-        />
       </FormGroup>
     </BaseNode>
   );

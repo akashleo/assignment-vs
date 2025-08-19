@@ -3,7 +3,7 @@
 // --------------------------------------------------
 
 import { useState, useRef, useCallback } from 'react';
-import ReactFlow, { Controls, Background, MiniMap, Panel } from 'reactflow';
+import ReactFlow, { Controls, Background, MiniMap } from 'reactflow';
 import { useStore } from './store';
 import { shallow } from 'zustand/shallow';
 import { InputNode } from './nodes/inputNode';
@@ -13,7 +13,7 @@ import { TextNode } from './nodes/textNode';
 import { FilterNode } from './nodes/filterNode';
 import { ConditionNode } from './nodes/conditionNode';
 import { DataSourceNode } from './nodes/dataSourceNode';
-import { TemplateNode } from './nodes/templateNode';
+import { GroupNode } from './nodes/groupNode';
 import { VisualizationNode } from './nodes/visualizationNode';
 
 import 'reactflow/dist/style.css';
@@ -28,7 +28,7 @@ const nodeTypes = {
   filter: FilterNode,
   condition: ConditionNode,
   dataSource: DataSourceNode,
-  template: TemplateNode,
+  group: GroupNode,
   visualization: VisualizationNode,
 };
 
@@ -56,9 +56,7 @@ export const PipelineUI = () => {
       addNode,
       onNodesChange,
       onEdgesChange,
-      onConnect,
-      clearPersistedState,
-      resetState
+      onConnect
     } = useStore(selector, shallow);
 
     const getInitNodeData = (nodeID, type) => {
@@ -137,36 +135,6 @@ export const PipelineUI = () => {
                 <Background color="#aaa" gap={gridSize} />
                 <Controls />
                 <MiniMap />
-                <Panel position="top-right">
-                    <button 
-                        onClick={clearPersistedState}
-                        style={{
-                            padding: '8px 16px',
-                            margin: '4px',
-                            backgroundColor: '#ef4444',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        Clear Storage
-                    </button>
-                    <button 
-                        onClick={resetState}
-                        style={{
-                            padding: '8px 16px',
-                            margin: '4px',
-                            backgroundColor: '#f59e0b',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        Reset Flow
-                    </button>
-                </Panel>
             </ReactFlow>
         </div>
         </>

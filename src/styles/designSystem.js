@@ -25,7 +25,7 @@ export const colors = {
     condition: '#f97316', // Orange for condition nodes
     data: '#84cc16',      // Lime for data source nodes
     viz: '#ec4899',       // Pink for visualization nodes
-    template: '#6366f1',  // Indigo for template nodes
+    group: '#6366f1',  // Indigo for group nodes
   },
   
   // Neutral colors
