@@ -1,7 +1,7 @@
 // groupNode.js
 
-import { useState, useCallback, useRef, useEffect } from 'react';
-import { Position, useReactFlow } from 'reactflow';
+import { useState, useCallback, useRef } from 'react';
+import { useReactFlow } from 'reactflow';
 import '../styles/groupNode.css';
 
 // Counter for auto-generating group names
@@ -10,8 +10,6 @@ let groupCounter = 1;
 export const GroupNode = ({ id, data, selected }) => {
   const reactFlowInstance = useReactFlow();
   const [groupName] = useState(data?.groupName || `Group ${groupCounter++}`);
-  const [width, setWidth] = useState(data?.width || 300);
-  const [height, setHeight] = useState(data?.height || 200);
   const [isDragOver, setIsDragOver] = useState(false);
   const [groupedNodes, setGroupedNodes] = useState(data?.groupedNodes || []);
   const containerRef = useRef(null);
@@ -92,49 +90,17 @@ export const GroupNode = ({ id, data, selected }) => {
     }
   }, [id, reactFlowInstance, groupedNodes]);
 
-  // Handle resizing
-  const handleMouseDown = useCallback((event) => {
-    if (event.target.classList.contains('group-resize-handle')) {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      const startX = event.clientX;
-      const startY = event.clientY;
-      const startWidth = width;
-      const startHeight = height;
+  // CSS-based resizing handled via .group-node-container { resize: both; overflow: auto; }
 
-      const handleMouseMove = (e) => {
-        const newWidth = Math.max(200, startWidth + (e.clientX - startX));
-        const newHeight = Math.max(150, startHeight + (e.clientY - startY));
-        setWidth(newWidth);
-        setHeight(newHeight);
-      };
-
-      const handleMouseUp = () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    }
-  }, [width, height]);
-
-  const containerStyle = {
-    width: `${width}px`,
-    height: `${height}px`,
-    position: 'relative'
-  };
+  // size controlled by CSS (see groupNode.css)
 
   return (
     <div 
       ref={containerRef}
       className={`group-node-container ${isDragOver ? 'drag-over' : ''}`}
-      style={containerStyle}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      onMouseDown={handleMouseDown}
     >
       <div className="group-label">
         {groupName}
@@ -147,8 +113,6 @@ export const GroupNode = ({ id, data, selected }) => {
           </div>
         )}
       </div>
-      
-      <div className="group-resize-handle" />
     </div>
   );
 };

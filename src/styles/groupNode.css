@@ -6,6 +6,9 @@
   border: 2px dashed #6366f1;
   border-radius: 12px;
   transition: all 0.2s ease;
+  /* CSS resize per https://dev.to/dailydevtips1/making-divs-user-resizable-with-css-3ga */
+  resize: both;
+  overflow: auto;
 }
 
 .group-node-container:hover {
@@ -84,27 +87,7 @@
   z-index: 10;
 }
 
-.group-resize-handle {
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 16px;
-  height: 16px;
-  background: #6366f1;
-  border-radius: 50%;
-  cursor: se-resize;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.group-node-container:hover .group-resize-handle {
-  opacity: 0.7;
-}
-
-.group-resize-handle:hover {
-  opacity: 1;
-  transform: scale(1.2);
-}
+/* removed old JS-driven resize handle styles */
 
 /* Animation for nodes being added to group */
 @keyframes nodeAddedToGroup {
@@ -135,4 +118,13 @@
 .group-node-container.cannot-drop {
   border-color: #ef4444;
   background-color: rgba(239, 68, 68, 0.03);
+}
+
+/* Remove unwanted border/outline on the React Flow group node wrapper */
+.react-flow__node-group,
+.react-flow__node-group.selected {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
