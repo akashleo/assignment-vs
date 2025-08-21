@@ -13,8 +13,9 @@ import { TextNode } from './nodes/textNode';
 import { FilterNode } from './nodes/filterNode';
 import { ConditionNode } from './nodes/conditionNode';
 import { DataSourceNode } from './nodes/dataSourceNode';
-import { GroupNode } from './nodes/groupNode';
 import { VisualizationNode } from './nodes/visualizationNode';
+import MathNode from './nodes/mathNode';
+import WebScraperNode from './nodes/webScraperNode';
 
 import 'reactflow/dist/style.css';
 
@@ -28,8 +29,9 @@ const nodeTypes = {
   filter: FilterNode,
   condition: ConditionNode,
   dataSource: DataSourceNode,
-  group: GroupNode,
   visualization: VisualizationNode,
+  math: MathNode,
+  webScraper: WebScraperNode,
 };
 
 // Use default React Flow edge types

@@ -22,28 +22,7 @@
   min-width: 250px;
 }
 
-/* Resize handle styling */
-.node-resize-control {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 10px;
-  height: 10px;
-  background-color: #e5e7eb;
-  border-radius: 2px;
-  cursor: nwse-resize;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.react-flow__node:hover .node-resize-control {
-  opacity: 0.7;
-}
-
-.node-resize-control:hover {
-  opacity: 1 !important;
-  background-color: #9ca3af;
-}
+/* Resize handle styling removed */
 
 /* Content scaling for responsive nodes */
 .react-flow__node-content {

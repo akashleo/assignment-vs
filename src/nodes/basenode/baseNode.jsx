@@ -13,7 +13,7 @@ import {
   NodeHeader,
   StyledBadge
 } from '../../components/StyledComponents.js';
-import NodeResizeHandle from '../../components/NodeResizeHandle';
+// Resize feature removed
 import '../../styles/nodeResponsive.css';
 
 export const BaseNode = ({ 
@@ -136,8 +136,7 @@ export const BaseNode = ({
           />
         ))}
         
-      {/* Add resize handle */}
-      <NodeResizeHandle nodeId={id} />
+      {/* Resize handle removed */}
     </StyledNodeContainer>
   );
 };

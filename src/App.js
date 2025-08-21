@@ -18,13 +18,14 @@ const nodeCategories = {
   ],
   Knowledge: [
     { type: 'dataSource', label: 'Data Source', icon: 'D' },
-    { type: 'group', label: 'Group', icon: 'G' }
+    { type: 'webScraper', label: 'Web Scraper', icon: 'W' },
   ],
   AI: [
     { type: 'llm', label: 'LLM', icon: 'L' }
   ],
   Data: [
-    { type: 'visualization', label: 'Visualize', icon: 'V' }
+    { type: 'visualization', label: 'Visualize', icon: 'V' },
+    { type: 'math', label: 'Math', icon: 'M' }
   ]
 };
 

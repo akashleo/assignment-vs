@@ -19,7 +19,8 @@ export const DraggableNode = ({ type, label, icon }) => {
         'dataSource': 'data',
         'template': 'template',
         'visualization': 'viz',
-        'group': 'group'
+        'math': 'math',
+        'webScraper': 'scraper'
       };
       return typeMap[nodeType] || 'input';
     };
